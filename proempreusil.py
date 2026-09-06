@@ -21,24 +21,24 @@ db_global = {
                 "id": "p1",
                 "nombre": "Puesto #01",
                 "referencia": "Esq. Av. Industrial con Av. Pacífico (Puerta Principal IE)",
-                "vendedor": "Don Carlos",
-                "icon": ft.Icons.STOREFRONT,
+                "vendedor": "Número #1",
+                "icon": "storefront",
                 "color": "#E05638"
             },
             {
                 "id": "p2",
                 "nombre": "Puesto #02",
                 "referencia": "Av. Pacífico cdra 2 (Frente al paradero)",
-                "vendedor": "Sra. María",
-                "icon": ft.Icons.SHOPPING_BAG,
+                "vendedor": "Número #2",
+                "icon": "shopping_bag",
                 "color": "#1E88E5"
             },
             {
                 "id": "p3",
                 "nombre": "Puesto #03",
                 "referencia": "Av. Industrial cdra 4 (Lado de la rotonda)",
-                "vendedor": "Don Jorge",
-                "icon": ft.Icons.STORE,
+                "vendedor": "Número 3",
+                "icon": "store",
                 "color": "#2E7D32"
             }
         ]
