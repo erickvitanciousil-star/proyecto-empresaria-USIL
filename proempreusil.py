@@ -65,7 +65,7 @@ def validar_correo(correo):
     patron = r'^[\w\.-]+@[\w\.-]+\.\w+$'
     return re.match(patron, correo) is not None
 
-def main(page: ft.Page):
+async def main(page: ft.Page):
     page.title = "Proyecto Empresarial USIL - Desayunos Express"
     page.bgcolor = "#FAFAFA"
     page.padding = 20
