@@ -992,10 +992,12 @@ def main(page: ft.Page):
 import os
 import flet_fastapi
 
-# Obtener ruta absoluta de la carpeta assets
-assets_path = os.path.abspath("assets")
+# Detectar la carpeta assets de forma segura
+assets_path = os.path.join(os.path.dirname(__file__), "assets")
+if not os.path.exists(assets_path):
+    assets_path = None
 
-# Envolver la aplicación de Flet para servidor
+# Envolver la aplicación para servidor en la nube
 app = flet_fastapi.app(
     main, 
     assets_dir=assets_path,
