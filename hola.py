@@ -1,14 +1,23 @@
-import http.server
-import socketserver
 import os
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
-PORT = int(os.environ.get("PORT", 8000))
-# Cambiar al directorio dist generado por flet publish
-web_dir = os.path.join(os.path.dirname(__file__), "dist")
-os.chdir(web_dir)
+app = FastAPI()
 
-Handler = http.server.SimpleHTTPRequestHandler
+# Ruta absoluta a la carpeta dist generada por flet publish
+dist_path = os.path.abspath("dist")
 
-with socketserver.TCPServer(("", PORT), Handler) as httpd:
-    print(f"Servidor Web corriendo en el puerto {PORT}")
-    httpd.serve_forever()
+# Montar archivos estáticos (JS, assets, WASM)
+app.mount("/static", StaticFiles(directory=dist_path), name="static")
+
+@app.get("/{catchall:path}")
+async def serve_app(catchall: str):
+    file_path = os.path.join(dist_path, catchall)
+    if os.path.exists(file_path) and os.path.isfile(file_path):
+        return FileResponse(file_path)
+    return FileResponse(os.path.join(dist_path, "index.html"))
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("hola:app", host="0.0.0.0", port=8000)
