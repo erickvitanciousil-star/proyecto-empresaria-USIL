@@ -1,21 +1,14 @@
+import http.server
+import socketserver
 import os
-import flet as ft
-import flet_fastapi
 
-# Obtener ruta absoluta de la carpeta assets
-assets_path = os.path.abspath("assets")
+PORT = int(os.environ.get("PORT", 8000))
+# Cambiar al directorio dist generado por flet publish
+web_dir = os.path.join(os.path.dirname(__file__), "dist")
+os.chdir(web_dir)
 
-def main(page: ft.Page):
-    # AQUÍ VA TODO EL CÓDIGO DE TU APP DESAYUNOS EXPRESS
-    pass
+Handler = http.server.SimpleHTTPRequestHandler
 
-# Inicialización estándar para servidores en producción
-app = flet_fastapi.app(
-    main, 
-    assets_dir=assets_path,
-    secret_key="desayunos_express_usil_secret_key"
-)
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("hola:app", host="0.0.0.0", port=8000)
+with socketserver.TCPServer(("", PORT), Handler) as httpd:
+    print(f"Servidor Web corriendo en el puerto {PORT}")
+    httpd.serve_forever()
