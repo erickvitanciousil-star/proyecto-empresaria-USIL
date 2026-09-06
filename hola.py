@@ -1,12 +1,12 @@
 import flet as ft
-from flet_fastapi import app as flet_fastapi_app
+import flet_fastapi
 
 def main(page: ft.Page):
-    # Tu código actual de la aplicación va aquí adentro
-    pass
+    # Tu código actual de la app
+    page.add(ft.Text("¡App Flet cargada con éxito!"))
 
-# Esta línea permite que Render/uvicorn ejecuten la app en la nube
-app = flet_fastapi_app(main)
+# Monta la aplicación con soporte para assets/imágenes
+app = flet_fastapi.app(main, assets_dir="assets")
 
 if __name__ == "__main__":
-    ft.app(target=main)
+    ft.app(target=main, assets_dir="assets")
